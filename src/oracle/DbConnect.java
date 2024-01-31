@@ -14,7 +14,7 @@ public class DbConnect {
     public Connection getOracle(){
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection(ORACLE_DB, "root", "1234");
+            conn = DriverManager.getConnection(ORACLE_DB, "stu", "a1234");
         } catch (SQLException e) {
             System.out.println("로컬 오라클 연결 실패");
         }
