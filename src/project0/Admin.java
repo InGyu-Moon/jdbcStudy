@@ -39,7 +39,7 @@ public class Admin {
         return flag;
     }
     public void selectAll(){
-        System.out.println("이름\t\t국어\t\t영어\t\t수학\t\t평균");
+        System.out.println("이름\t\t석차\t\t국어\t\t영어\t\t수학\t\t평균");
         System.out.println("=========================================");
 
         String sql = "SELECT ss.member_id, ss.korean, ss.english, ss.math, m.username, " +
@@ -53,6 +53,7 @@ public class Admin {
         ResultSet rs = null;
 
         conn = db.getOracle();
+        int i=1;
         try {
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
@@ -63,7 +64,7 @@ public class Admin {
                 int math = rs.getInt("math");
                 double avg = rs.getDouble("avg");
                 String username = rs.getString("username");
-                System.out.println(username + "\t" + korean + "\t\t" + english + "\t\t" + math + "\t\t" + String.format("%.2f", avg));
+                System.out.println(username + "\t  " + i++ + "\t\t" + korean + "\t\t" + english + "\t\t" + math + "\t\t" + String.format("%.2f", avg));
 
             }
             System.out.println("=========================================");

@@ -23,6 +23,9 @@ public class MainProject {
                 if (memberId != 0) {
                     System.out.println("\n---로그인 성공---\n");
 
+                    // 로그인 성공시 환영 메시지 출력
+                    printWelcomeMessage(member, memberId);
+
                     // 로그인 성공시 성적 입력,조회,수정,삭제 진행
                     scoreCrud(sc, score, memberId);
                 }
@@ -33,7 +36,7 @@ public class MainProject {
             }
             // 2. 회원가입
             else if (input == 2) {
-                tryNewMember(sc, member);
+                tryNewMember(sc, member); // 회원가입 진행
             }
             // 3. 관리자 로그인
             else if (input == 3) {
@@ -44,8 +47,8 @@ public class MainProject {
                 if (memberId != 0 && admin.checkIsAdminByMemberId(memberId)) {
                     System.out.println("\n---관리자 로그인 성공---\n");
 
-                    //admin 성적 조회
-                    adminMethod(sc, admin);
+                    //admin 페이지
+                    goToAdminPage(sc, admin);
                 }
                 // 그외의 경우 즉, 로그인 실패 또는 로그인을 성공했지만 관리자가 아님
                 else {
@@ -60,12 +63,16 @@ public class MainProject {
         }
     }
 
-    private static void adminMethod(Scanner sc, Admin admin) {
+    private static void printWelcomeMessage(Member member, int memberId) {
+        System.out.println(member.findUsernameByMemberId(memberId) + "님 환영합니다\n");
+    }
+
+    private static void goToAdminPage(Scanner sc, Admin admin) {
         while (true) {
             System.out.println("1. 전체 학생 성적 조회   9.로그아웃");
             int adminInput = Integer.parseInt(sc.nextLine());
 
-            // 1. 성적 입력
+            // 1. 성적 조회
             if (adminInput == 1) {
                 admin.selectAll(); // 입력
             }

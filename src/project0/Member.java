@@ -62,4 +62,29 @@ public class Member {
             db.dbClose(pstmt,conn);
         }
     }
+
+    public String findUsernameByMemberId(int memberId){
+
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String sql = "select username from member where member_id = ?";
+
+        conn = db.getOracle();
+        try {
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setInt(1, memberId);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("username");
+            }
+        } catch (SQLException e) {
+            System.out.println("e = " + e);
+        } finally {
+            db.dbClose(rs,pstmt,conn);
+        }
+        return null;
+    }
 }
